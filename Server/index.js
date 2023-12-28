@@ -5,7 +5,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const healthRoutes = require("./Src/Routes/HealthRoutes");
 const UserRoute = require("./Src/Routes/UserRoute");
+const JobRoutes = require("./Src/Routes/JobRoutes");
 const errorHandler = require("./Src/Middleware/ErrorHandler");
+
 dotenv.config();
 
 const app = express();
@@ -26,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.get("/health", healthRoutes);
 app.use("/users", UserRoute);
+app.use(JobRoutes);
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {

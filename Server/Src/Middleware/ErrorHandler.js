@@ -1,11 +1,11 @@
 const express = require("express");
 const errorHandler = (req, res) => {
-//   console.error(err);
+  //   console.error(err);
 
   const statusCode = 404;
 
   res.status(statusCode).json({
-    message: "Something went wrong! Please try after some time.",
+    message: "404 page not found",
     error: "Internal Server Error",
   });
 };
