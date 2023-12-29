@@ -1,10 +1,25 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { login } from "../Store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
-  const onsubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+
+  const onsubmit = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:5000/users/login", data);
+
+      const token = res.data.jwttoken;
+      dispatch({ type: login, payload: token });
+      Navigate("/");
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
     reset();
   };
   return (
@@ -12,7 +27,7 @@ function Login() {
       <h1>Already have an account?</h1>
       <p>Your personal job finder is here</p>
       <form
-        onClick={handleSubmit(onsubmit)}
+        onSubmit={handleSubmit(onsubmit)}
         style={{ display: "flex", flexDirection: "column", width: "50vh" }}
       >
         <input
