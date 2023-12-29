@@ -36,12 +36,12 @@ router.post("/login", async (req, res) => {
       let haspasswordmatched = await bcrypt.compare(password, user.password);
       if (haspasswordmatched) {
         const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_SECRETKEY, {
-          expiresIn: 30,
+          expiresIn: "30m",
         });
         res.json({
           status: "success",
           msg: "You've Succesfully login",
-          jwttoken, 
+          jwttoken,
         });
       } else {
         res.json({
