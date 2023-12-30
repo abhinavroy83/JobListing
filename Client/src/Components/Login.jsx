@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { login } from "../Store/authSlice";
+import { login as authlogin } from "../Store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -15,10 +15,15 @@ function Login() {
       const res = await axios.post("http://localhost:5000/users/login", data);
 
       const token = res.data.jwttoken;
-      dispatch({ type: login, payload: token });
+      if (token) {
+        console.log(token);
+        dispatch(authlogin({token}));
+      } else {
+        alert("User not found. Please check your credentials.");
+      }
       Navigate("/");
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error("Error during login:", error.message);
     }
     reset();
   };

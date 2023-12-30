@@ -8,7 +8,7 @@ const isloggendIn = (req, res, next) => {
     const user = jwt.verify(jwttoken, process.env.JWT_SECRETKEY);
     next();
   } catch (error) {
-    req.json({
+    res.json({
       status: "failed",
       msg: "you haven't login",
     });
