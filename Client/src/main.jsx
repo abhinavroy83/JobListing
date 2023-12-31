@@ -9,6 +9,7 @@ import Home from "./Pages/Home.jsx";
 import { Authlayout, Addjob } from "./Components/index.js";
 import { Provider } from "react-redux";
 import store from "./Store/store.js";
+import Job from "./Pages/Job.jsx";
 
 const route = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const route = createBrowserRouter([
             <Addjob />
           </Authlayout>
         ),
+      },
+      {
+        path: "/job/:_id",
+        element: <Job />,
       },
     ],
   },

@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const RegisterDetails = require("../Models/User");
 const jwt = require("jsonwebtoken");
+const jobDetail = require("../Models/job");
 
 router.post("/register", async (req, res) => {
   try {
@@ -66,18 +67,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/details", async (req, res) => {
-  const user = await RegisterDetails.find({});
-  try {
-    res.json({
-      status: "sucess",
-      data: user,
-    });
-  } catch (error) {
-    res.json({
-      status: "faild",
-    });
-  }
-});
+
 
 module.exports = router;
