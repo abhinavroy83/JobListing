@@ -1,0 +1,18 @@
+.header_main {
+  height: 12vh;
+  border-radius: 0px 0px 62px 55px;
+  background: #ed5353;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.header_name {
+  color: #fff;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 144.023%; /* 43.207px */
+}

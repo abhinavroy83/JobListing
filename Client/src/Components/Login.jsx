@@ -14,14 +14,16 @@ function Login() {
     try {
       const res = await axios.post("http://localhost:5000/users/login", data);
 
-      const token = res.data.jwttoken;
-      if (token) {
-        console.log(token);
-        dispatch(authlogin({token}));
+      const result = res.data;
+      // const token = res.data.jwttoken;
+      // const user=res.data.username;
+      if (result.status === "success") {
+        localStorage.setItem("userdetails", JSON.stringify(result));
+        dispatch(authlogin({ token: result.jwttoken, user: result.username }));
+        Navigate("/");
       } else {
         alert("User not found. Please check your credentials.");
       }
-      Navigate("/");
     } catch (error) {
       console.error("Error during login:", error.message);
     }

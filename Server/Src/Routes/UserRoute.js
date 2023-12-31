@@ -19,8 +19,9 @@ router.post("/register", async (req, res) => {
       status: "success",
     });
   } catch (error) {
+    console.log(error);
     res.json({
-      status: failed,
+      status: "failed",
     });
   }
 });
@@ -42,6 +43,7 @@ router.post("/login", async (req, res) => {
           status: "success",
           msg: "You've Succesfully login",
           jwttoken,
+          username: user.name,
         });
       } else {
         res.json({

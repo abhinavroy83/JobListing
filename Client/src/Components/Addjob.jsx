@@ -19,7 +19,7 @@ function Addjob() {
 
   const Onsubmit = async (data) => {
     data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
-    console.log('token in job page',token)
+    console.log("token in job page", token);
     try {
       const response = await axios.post("http://localhost:5000/addjob", data, {
         headers: {
@@ -27,7 +27,7 @@ function Addjob() {
         },
       });
       if (response) {
-        alert('job added succesfully')
+        alert("job added succesfully");
         console.log(response.data);
       }
     } catch (error) {
@@ -40,7 +40,7 @@ function Addjob() {
       <h1>Add job description</h1>
       <form onSubmit={handleSubmit(Onsubmit)}>
         <div>
-          <label htmlFor="">Compant Name</label>
+          <label className="">Compant Name</label>
           <input
             type="text"
             placeholder="Enter your company name here"
