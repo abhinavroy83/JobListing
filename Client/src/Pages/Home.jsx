@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobCard from "../Components/JobCard";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [job, setjob] = useState([]);
@@ -18,6 +19,7 @@ function Home() {
 
   return (
     <>
+      <Link to="/addjob">addjob</Link>
       {job ? (
         <div>
           {job.map((item) => (

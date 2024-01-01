@@ -6,10 +6,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Signup from "./Pages/Signup.jsx";
 import Login from "./Pages/Login.jsx";
 import Home from "./Pages/Home.jsx";
-import { Authlayout, Addjob } from "./Components/index.js";
+import { Authlayout } from "./Components/index.js";
 import { Provider } from "react-redux";
 import store from "./Store/store.js";
 import Job from "./Pages/Job.jsx";
+import Addjob from "./Pages/Addjob.jsx";
+import Editjob from "./Pages/Editjob.jsx";
 
 const route = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const route = createBrowserRouter([
         element: (
           <Authlayout authentication>
             <Addjob />
+          </Authlayout>
+        ),
+      },
+      {
+        path: "/job/edit/:_id",
+        element: (
+          <Authlayout authentication>
+            <Editjob />
           </Authlayout>
         ),
       },

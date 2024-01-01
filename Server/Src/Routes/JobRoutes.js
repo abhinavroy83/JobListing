@@ -67,4 +67,24 @@ router.get("/job/:jobId", async (req, res) => {
   }
 });
 
+router.put("/job/editjob/:jobId", async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const updatejob = req.body;
+    const result = await jobDetail.findByIdAndUpdate(jobId, updatejob, {
+      new: true,
+    });
+    if (result) {
+      res.status(404).json({
+        status: "sucess",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      msg: "failed",
+    }); 
+  }
+});
+
 module.exports = router;

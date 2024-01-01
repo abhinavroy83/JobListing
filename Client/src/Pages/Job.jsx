@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 function Job() {
   const { _id } = useParams();
   const [job, setJob] = useState(null);
+
   // console.log("param", _id);
 
   useEffect(() => {
@@ -25,7 +26,13 @@ function Job() {
     <div>
       <p>hello</p>
       {job ? (
-        <div>{<h1>{job.CompanyName}</h1>}</div>
+        <div>
+          {<h1>{job.CompanyName}</h1>}
+
+          <Link to={`/job/edit/${job._id}`}>
+            <p>edit 2</p>
+          </Link>
+        </div>
       ) : (
         <div>
           <h1>loading...</h1>

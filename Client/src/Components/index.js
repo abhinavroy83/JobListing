@@ -1,7 +1,7 @@
 import Signup from "./Signup";
 import Login from "./Login";
 import Authlayout from "./Authlayout";
-import Addjob from "./Addjob";
+import JobForm from "./JobForm/JobForm";
 import Header from "./Header/Header";
 
-export { Signup, Header, Login, Addjob, Authlayout };
+export { Signup, Header, Login, JobForm, Authlayout };

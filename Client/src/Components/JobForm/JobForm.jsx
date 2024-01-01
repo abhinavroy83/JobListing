@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-function Addjob() {
+function JobForm({ post }) {
   const token = useSelector((state) => state.auth.token);
-  const [job, setJobs] = useState([]);
+  // const [job, setJobs] = useState([]);
   const Jobtype = ["fulltime", "internship"];
   const remote_office = ["Remote", "Office"];
   const {
@@ -13,28 +13,66 @@ function Addjob() {
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
   const inputSkills = watch("Skillrequired", "");
+  console.log("editpsot", post);
 
   const Onsubmit = async (data) => {
     data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
-    console.log("token in job page", token);
-    try {
-      const response = await axios.post("http://localhost:5000/addjob", data, {
-        headers: {
-          jwttoken: `${token}`,
-        },
-      });
-      if (response) {
-        alert("job added succesfully");
-        console.log(response.data);
+    // console.log("token in job page", token);
+    if (post) {
+      try {
+        const editres = await axios.put(
+          `http://localhost:5000/job/editjob/${post._id}`,
+          data
+        );
+        console.log("edit re", editres);
+        if (editres) {
+          alert("job update successfully");
+        }
+      } catch (error) {
+        console.error("error during edting", error);
       }
-    } catch (error) {
-      console.error("Error during job fetch:", error);
+    } else {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/addjob",
+          data,
+          {
+            headers: {
+              jwttoken: `${token}`,
+            },
+          }
+        );
+        if (response) {
+          alert("job added succesfully");
+          // console.log(response.data);
+        }
+      } catch (error) {
+        console.error("Error during job fetch:", error);
+      }
     }
     reset();
   };
+  useEffect(() => {
+    // Set default values when post changes
+    setValue("CompanyName", post?.CompanyName || "");
+    setValue("Logo", post?.Logo || "");
+    setValue("Jobposition", post?.Jobposition || "");
+    setValue("Montly_Salary", post?.Montly_Salary || "");
+    setValue("Jobtype", post?.Jobtype || "");
+    setValue("Remote_office", post?.Remote_office || "");
+    setValue("Location", post?.Location || "");
+    setValue("JobDescription", post?.JobDescription || "");
+    setValue("AboutCompany", post?.AboutCompany || "");
+    setValue("Skillrequired", post?.Skillrequired || "");
+    setValue("Information", post?.Information || "");
+
+    console.log("Updated defaultValues", watch());
+  }, [post, setValue]);
+
   return (
     <div>
       <h1>Add job description</h1>
@@ -45,6 +83,7 @@ function Addjob() {
             type="text"
             placeholder="Enter your company name here"
             {...register("CompanyName", { required: true })}
+            // value={post.CompanyName}
           />
           {errors.CompanyName && (
             <p style={{ color: "red" }}>CompanyName is required</p>
@@ -147,10 +186,10 @@ function Addjob() {
             <p style={{ color: "red" }}>Information can't be empty</p>
           )}
         </div>
-        <button type="submit">Add</button>
+        <button type="submit">{post ? "update" : "add"}</button>
       </form>
     </div>
   );
 }
 
-export default Addjob;
+export default JobForm;
