@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobCard from "../Components/JobCard";
 import { Link } from "react-router-dom";
-import { Container } from "../Components";
+
+import { Container, Header } from "../Components";
 
 function Home() {
   const [job, setjob] = useState([]);
@@ -20,6 +21,7 @@ function Home() {
 
   return (
     <div>
+      <Header />
       {job && job.length > 0 ? (
         <div className="w-full py-8">
           {/* <Link to="/addjob">addjob</Link> */}

@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 function JobCard({ ...post }) {
   const skills = post.Skillrequired;
   const authStatus = useSelector((state) => state.auth.status);
-  // const authStatus = useSelector((state) => state.auth.status);
-
   // data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
 
   return (
@@ -66,7 +64,7 @@ function JobCard({ ...post }) {
                 </div>
               ))}
             </div>
-            <div className="flex justify-end m-1">
+            <div className="flex justify-end m-1 pt-2">
               <div>
                 {authStatus ? (
                   <div className=" border-2 rounded-md w-36 h-9 mr-1 border-red-500">

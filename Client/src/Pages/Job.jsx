@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { Container } from "../Components";
+import { Container, Header } from "../Components";
 import { useSelector } from "react-redux";
 function Job() {
   const { _id } = useParams();
@@ -27,6 +27,7 @@ function Job() {
 
   return (
     <div className=" bg-pink-50 h-full">
+      <Header />
       <Container>
         {job ? (
           <div className=" bg-white shadow-lg p-14 mt-4">

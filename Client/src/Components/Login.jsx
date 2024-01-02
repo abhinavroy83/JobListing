@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { login as authlogin } from "../Store/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Input } from "./index";
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
@@ -37,7 +38,7 @@ function Login() {
         onSubmit={handleSubmit(onsubmit)}
         style={{ display: "flex", flexDirection: "column", width: "50vh" }}
       >
-        <input
+        <Input
           type="text"
           placeholder="Email"
           {...register("email", {
@@ -49,7 +50,7 @@ function Login() {
             },
           })}
         />
-        <input
+        <Input
           type="password"
           placeholder="Password"
           {...register("password", {

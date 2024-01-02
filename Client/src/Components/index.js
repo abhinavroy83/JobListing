@@ -4,5 +4,6 @@ import Authlayout from "./Authlayout";
 import JobForm from "./JobForm/JobForm";
 import Header from "./Header/Header";
 import Container from "./Container/Container";
+import Input from "./Input";
 
-export { Signup, Header, Login, Container, JobForm, Authlayout };
+export { Signup, Header, Login, Container, JobForm, Authlayout, Input };

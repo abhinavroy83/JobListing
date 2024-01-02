@@ -15,9 +15,18 @@ router.post("/register", async (req, res) => {
       number,
       password: encryptpass,
     });
+    const jwttoken = jwt.sign(
+      {
+        username: newUser.name,
+      },
+      process.env.JWT_SECRETKEY,
+      { expiresIn: "30m" }
+    );
     await newUser.save();
     res.json({
       status: "success",
+      jwttoken,
+      username: name,
     });
   } catch (error) {
     console.log(error);
@@ -66,7 +75,5 @@ router.post("/login", async (req, res) => {
     });
   }
 });
-
-
 
 module.exports = router;

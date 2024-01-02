@@ -1,27 +1,14 @@
 import React, { useEffect } from "react";
 import "./Header.css";
 import { useSelector, useDispatch } from "react-redux";
-import { login as authlogin } from "../../Store/authSlice";
+// import { login as authlogin } from "../../Store/authSlice";
 import Logoutbtn from "./Logoutbtn";
 import { Link } from "react-router-dom";
 
 function Header() {
-  const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
   const user = useSelector((state) => state.auth.user);
-  // console.log(user);
-  useEffect(() => {
-    // Check local storage for user details on page load
-    const storedUser = JSON.parse(localStorage.getItem("userdetails"));
 
-    if (storedUser) {
-      // Automatically log in the user if details are found
-      //   console.log("Redux State:", useSelector((state) => state.auth));
-      dispatch(
-        authlogin({ token: storedUser.jwttoken, user: storedUser.username })
-      );
-    }
-  }, [dispatch]);
   return (
     <div className="header_main">
       <div className="header_name">
