@@ -6,7 +6,7 @@ const jobDetail = require("../Models/job");
 router.post("/addjob", IsloggedIn, async (req, res) => {
   try {
     const job = new jobDetail(req.body);
-    console.log(req.body);
+    // console.log(req.body);
     await job.save();
     res.json({
       status: "success",
@@ -75,15 +75,16 @@ router.put("/job/editjob/:jobId", async (req, res) => {
       new: true,
     });
     if (result) {
-      res.status(404).json({
+      res.json({
         status: "sucess",
+        
       });
     }
   } catch (error) {
     console.log(error);
     res.json({
       msg: "failed",
-    }); 
+    });
   }
 });
 

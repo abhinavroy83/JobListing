@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 function JobForm({ post }) {
   const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+  const { _id } = useParams();
   // const [job, setJobs] = useState([]);
   const Jobtype = ["fulltime", "internship"];
   const remote_office = ["Remote", "Office"];
@@ -16,26 +19,27 @@ function JobForm({ post }) {
     setValue,
     formState: { errors },
   } = useForm();
-  const inputSkills = watch("Skillrequired", "");
-  console.log("editpsot", post);
+  // console.log("editpsot", post);
 
+  const inputSkills = watch("Skillrequired", "");
   const Onsubmit = async (data) => {
-    data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
-    // console.log("token in job page", token);
     if (post) {
+      // data.Skillrequired = (data.Skillrequired || "").split(",").map((skill) => skill.trim());
       try {
         const editres = await axios.put(
           `http://localhost:5000/job/editjob/${post._id}`,
           data
         );
-        console.log("edit re", editres);
+        // console.log("edit re", editres);
         if (editres) {
-          alert("job update successfully");
+          // alert("job update successfully");
+          navigate(`/job/${post._id}`);
         }
       } catch (error) {
         console.error("error during edting", error);
       }
     } else {
+      data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
       try {
         const response = await axios.post(
           "http://localhost:5000/addjob",
@@ -67,10 +71,12 @@ function JobForm({ post }) {
     setValue("Location", post?.Location || "");
     setValue("JobDescription", post?.JobDescription || "");
     setValue("AboutCompany", post?.AboutCompany || "");
+    // console.log(typeof post?.Skillrequired);
+
     setValue("Skillrequired", post?.Skillrequired || "");
     setValue("Information", post?.Information || "");
 
-    console.log("Updated defaultValues", watch());
+    // console.log("Updated defaultValues", watch());
   }, [post, setValue]);
 
   return (
@@ -150,8 +156,9 @@ function JobForm({ post }) {
         </div>
         <div>
           <label htmlFor="">JobDescription</label>
-          <input
-            type="text"
+          <textarea
+            rows="8"
+            cols="30"
             {...register("JobDescription", { required: true })}
           />
           {errors.JobDescription && (
@@ -160,7 +167,9 @@ function JobForm({ post }) {
         </div>
         <div>
           <label htmlFor="">AboutCompany</label>
-          <input
+          <textarea
+            rows="4"
+            cols="30"
             type="text"
             {...register("AboutCompany", { required: true })}
           />
@@ -181,7 +190,12 @@ function JobForm({ post }) {
         </div>
         <div>
           <label htmlFor="">Information</label>
-          <input type="text" {...register("Information", { required: true })} />
+          <textarea
+            rows="4"
+            cols="30"
+            type="text"
+            {...register("Information", { required: true })}
+          />
           {errors.Information && (
             <p style={{ color: "red" }}>Information can't be empty</p>
           )}

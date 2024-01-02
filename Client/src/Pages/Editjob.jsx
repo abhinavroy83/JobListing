@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { JobForm } from "../Components";
+import { Container } from "../Components";
 
 function Editjob() {
   const { _id } = useParams();
@@ -20,7 +21,9 @@ function Editjob() {
   }, [_id]);
   return (
     <div>
-      <JobForm post={post} />
+      <Container>
+        <JobForm post={post} />
+      </Container>
     </div>
   );
 }

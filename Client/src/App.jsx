@@ -4,10 +4,10 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className=" w-full flex flex-wrap">
+    <div className=" min-h-screen flex flex-wrap content-between">
       <div className=" w-full block">
         <Header />
-        <main>
+        <main >
           <Outlet />
         </main>
       </div>
