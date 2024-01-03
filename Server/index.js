@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "*",
+    origin: ["https://job-listing78.vercel.app", "http://localhost:5173"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     exposedHeaders: "*",

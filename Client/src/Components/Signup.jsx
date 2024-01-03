@@ -19,7 +19,7 @@ function Signup() {
     try {
       // console.log(data);
       axios
-        .post("http://joblisting-cg6e.onrender.com/users/register", data, {
+        .post("https://joblisting-cg6e.onrender.com/users/register", data, {
           headers: {
             "Content-Type": "application/json",
           },
