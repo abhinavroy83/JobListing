@@ -18,31 +18,47 @@ function Login() {
   const [dtx, setdtx] = useState(null);
   const onsubmit = async (data) => {
     console.log(data);
-    try {
-      const res = await axios.post(
-        "http://joblisting-cg6e.onrender.com/users/login",
-        data
-      );
+    if (data) {
+      try {
+        const res = await fetch(
+          "http://joblisting-cg6e.onrender.com/users/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-      const result = res.data;
-      // console.log(data)
-      // setdtx(result);
-      // const token = res.data.jwttoken;
-      // const user=res.data.username;
-      if (result.status === "success") {
-        localStorage.setItem("userdetails", JSON.stringify(result));
-        dispatch(authlogin({ token: result.jwttoken, user: result.username }));
-        Navigate("/");
-      } else {
-        alert("User not found. Please check your credentials.");
+        if (!res.ok) {
+          throw new Error(
+            `HTTP error! Status: ${res.status}, ${await res.text()}`
+          );
+        }
+
+        const result = await res.json();
+        // console.log(data)
+        // setdtx(result);
+        // const token = res.data.jwttoken;
+        // const user=res.data.username;
+        if (result.status === "success") {
+          localStorage.setItem("userdetails", JSON.stringify(result));
+          dispatch(
+            authlogin({ token: result.jwttoken, user: result.username })
+          );
+          Navigate("/");
+        } else {
+          alert("User not found. Please check your credentials.");
+        }
+      } catch (error) {
+        console.error("Error during login:", error.message);
+        console.error("Response data:", error.response?.data);
+        console.error("Response status:", error.response?.status);
+        console.error("Response headers:", error.response?.headers);
+
+        alert("An error occurred during login. Please try again later.");
       }
-    } catch (error) {
-      console.error("Error during login:", error.message);
-      console.error("Response data:", error.response?.data);
-      console.error("Response status:", error.response?.status);
-      console.error("Response headers:", error.response?.headers);
-
-      alert("An error occurred during login. Please try again later.");
     }
     reset();
   };
