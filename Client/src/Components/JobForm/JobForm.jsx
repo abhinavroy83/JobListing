@@ -29,8 +29,14 @@ function JobForm({ post }) {
       // data.Skillrequired = (data.Skillrequired || "").split(",").map((skill) => skill.trim());
       try {
         const editres = await axios.put(
-          `http://joblisting-cg6e.onrender.com/job/editjob/${post._id}`,
-          data
+          `https://joblisting-cg6e.onrender.com/job/editjob/${post._id}`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
         );
         // console.log("edit re", editres);
         if (editres) {
@@ -44,12 +50,14 @@ function JobForm({ post }) {
       data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
       try {
         const response = await axios.post(
-          "http://joblisting-cg6e.onrender.com/addjob",
+          "https://joblisting-cg6e.onrender.com/addjob",
           data,
           {
             headers: {
               jwttoken: `${token}`,
+              "Content-Type": "application/json",
             },
+            withCredentials: true,
           }
         );
         if (response) {
