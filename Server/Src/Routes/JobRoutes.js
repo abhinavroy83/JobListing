@@ -6,7 +6,7 @@ const jobDetail = require("../Models/job");
 router.post("/addjob", IsloggedIn, async (req, res) => {
   try {
     const job = new jobDetail(req.body);
-    // console.log(req.body);
+    console.log(job);
     await job.save();
     res.json({
       status: "success",
@@ -19,7 +19,6 @@ router.post("/addjob", IsloggedIn, async (req, res) => {
     });
   }
 });
-
 
 router.get("/home", IsloggedIn, async (req, res) => {
   try {
@@ -72,6 +71,7 @@ router.put("/job/editjob/:jobId", async (req, res) => {
   try {
     const { jobId } = req.params;
     const updatejob = req.body;
+    console.log("edit:", updatejob);
     const result = await jobDetail.findByIdAndUpdate(jobId, updatejob, {
       new: true,
     });
