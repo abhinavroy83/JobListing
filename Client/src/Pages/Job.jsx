@@ -13,7 +13,12 @@ function Job() {
 
   useEffect(() => {
     axios
-      .get(`https://joblisting-cg6e.onrender.com/job/${_id}`)
+      .get(`https://joblisting-cg6e.onrender.com/job/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data && res.data.job) {
           setJob(res.data.job);

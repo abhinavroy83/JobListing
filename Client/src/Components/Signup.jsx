@@ -19,7 +19,12 @@ function Signup() {
     try {
       // console.log(data);
       axios
-        .post("http://joblisting-cg6e.onrender.com/users/register", data)
+        .post("http://joblisting-cg6e.onrender.com/users/register", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, 
+        })
         .then((res) => {
           const result = res.data;
           // const token = res.data.jwttoken;
