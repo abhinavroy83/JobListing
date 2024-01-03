@@ -8,26 +8,34 @@ const jobDetail = require("../Models/job");
 router.post("/register", async (req, res) => {
   try {
     const { name, email, number, password } = req.body;
-    const encryptpass = await bcrypt.hash(password, 10);
-    const newUser = new RegisterDetails({
-      name,
-      email,
-      number,
-      password: encryptpass,
-    });
-    const jwttoken = jwt.sign(
-      {
-        username: newUser.name,
-      },
-      process.env.JWT_SECRETKEY,
-      { expiresIn: "30m" }
-    );
-    await newUser.save();
-    res.json({
-      status: "success",
-      jwttoken,
-      username: name,
-    });
+    const exituser = await RegisterDetails.findOne({ email });
+    if (exituser) {
+      res.json({
+        status: "failed",
+        msg: "Email already exists",
+      });
+    } else {
+      const encryptpass = await bcrypt.hash(password, 10);
+      const newUser = new RegisterDetails({
+        name,
+        email,
+        number,
+        password: encryptpass,
+      });
+      const jwttoken = jwt.sign(
+        {
+          username: newUser.name,
+        },
+        process.env.JWT_SECRETKEY,
+        { expiresIn: "300000000m" }
+      );
+      await newUser.save();
+      res.json({
+        status: "success",
+        jwttoken,
+        username: name,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.json({

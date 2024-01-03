@@ -14,7 +14,7 @@ function JobCard({ ...post }) {
     <div>
       {post ? (
         <div
-          className=" w-full bg-white h-28 m-3 p-3 flex justify-between"
+          className=" w-full bg-white h-28 my-4 p-3 flex justify-between"
           style={{ boxShadow: "0px 0px 22px 4px rgba(255, 32, 32, 0.25)" }}
         >
           <div className="flex w-5/12">

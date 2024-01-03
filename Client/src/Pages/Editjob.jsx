@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { JobForm } from "../Components";
 import { Container } from "../Components";
+import jef from "../assets/aef.png";
 
 function Editjob() {
   const { _id } = useParams();
@@ -21,9 +22,12 @@ function Editjob() {
   }, [_id]);
   return (
     <div>
-      <Container>
-        <JobForm post={post} />
-      </Container>
+      <div className="flex justify-between h-full">
+        <div className="flex justify-center h-screen p-4 w-8/12 bg-pink-50">
+          <JobForm post={post} />
+        </div>
+        <img src={jef} alt="not" className=" w-4/12 h-screen bg-contain " />
+      </div>
     </div>
   );
 }

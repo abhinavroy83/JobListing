@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { Input } from "../index";
 
 function JobForm({ post }) {
   const token = useSelector((state) => state.auth.token);
@@ -51,7 +52,8 @@ function JobForm({ post }) {
           }
         );
         if (response) {
-          alert("job added succesfully");
+          // console.log(res)
+          navigate("/");
           // console.log(response.data);
         }
       } catch (error) {
@@ -80,50 +82,76 @@ function JobForm({ post }) {
   }, [post, setValue]);
 
   return (
-    <div>
-      <h1>Add job description</h1>
+    <div className="flex w-5/6 flex-col ">
+      <p className="text-black font-dm-sans text-4xl font-bold leading-[144.023%]">
+        Add job description
+      </p>
       <form onSubmit={handleSubmit(Onsubmit)}>
-        <div>
-          <label className="">Compant Name</label>
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl text-center font-normal">
+            Company Name
+          </p>
           <input
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200 "
             type="text"
             placeholder="Enter your company name here"
             {...register("CompanyName", { required: true })}
             // value={post.CompanyName}
           />
-          {errors.CompanyName && (
-            <p style={{ color: "red" }}>CompanyName is required</p>
-          )}
         </div>
-        <div>
-          <label htmlFor="">Add logo url</label>
+        {errors.CompanyName && (
+          <p style={{ color: "red" }} className=" text-xs">
+            CompanyName is required
+          </p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Add logo url
+          </p>
+
           <input
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200 "
             type="text"
             placeholder="Enter the link"
             {...register("Logo", { required: true })}
           />
-          {errors.Logo && <p style={{ color: "red" }}>Logo is required</p>}
         </div>
-        <div>
-          <label htmlFor="">Job Postion</label>
-          <input type="text" {...register("Jobposition", { required: true })} />
-          {errors.Jobposition && (
-            <p style={{ color: "red" }}>Jobposition is required</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="">Montly Salary</label>
+        {errors.Logo && <p style={{ color: "red" }}>Logo is required</p>}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Job Postion
+          </p>
+
           <input
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200 "
+            type="text"
+            {...register("Jobposition", { required: true })}
+          />
+        </div>
+        {errors.Jobposition && (
+          <p style={{ color: "red" }}>Jobposition is required</p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Montly Salary
+          </p>
+          <input
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200 "
             type="Number"
             {...register("Montly_Salary", { required: true })}
           />
-          {errors.Montly_Salary && (
-            <p style={{ color: "red" }}>Montly_Salary is required</p>
-          )}
         </div>
-        <div>
-          <label htmlFor="">Job type</label>
-          <select {...register("Jobtype", { required: true })}>
+        {errors.Montly_Salary && (
+          <p style={{ color: "red" }}>Montly_Salary is required</p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Job type
+          </p>
+          <select
+            {...register("Jobtype", { required: true })}
+            className=" px-4 py-1 my-2 w-4/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
+          >
             <option value="">Select</option>
             {Jobtype.map((type, index) => (
               <option key={type} value={type}>
@@ -131,11 +159,16 @@ function JobForm({ post }) {
               </option>
             ))}
           </select>
-          {errors.Jobtype && <p style={{ color: "red" }}>Skill is required</p>}
         </div>
-        <div>
-          <label htmlFor="">Remote/office</label>
-          <select {...register("Remote_office", { required: true })}>
+        {errors.Jobtype && <p style={{ color: "red" }}>Skill is required</p>}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Remote/office
+          </p>
+          <select
+            className=" px-4 py-1 my-2 w-4/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
+            {...register("Remote_office", { required: true })}
+          >
             <option value="">Select</option>
             {remote_office.map((item, index) => (
               <option key={item} value={item}>
@@ -143,64 +176,87 @@ function JobForm({ post }) {
               </option>
             ))}
           </select>
-          {errors.Remote_office && (
-            <p style={{ color: "red" }}>select an option </p>
-          )}
         </div>
-        <div>
-          <label htmlFor="">Location</label>
-          <input type="text" {...register("Location", { required: true })} />
-          {errors.Location && (
-            <p style={{ color: "red" }}>Location can't be empty</p>
-          )}
+        {errors.Remote_office && (
+          <p style={{ color: "red" }}>select an option </p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Location
+          </p>
+          <input
+            type="text"
+            {...register("Location", { required: true })}
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
+          />
         </div>
-        <div>
-          <label htmlFor="">JobDescription</label>
+        {errors.Location && (
+          <p style={{ color: "red" }}>Location can't be empty</p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            JobDescription
+          </p>
           <textarea
-            rows="8"
-            cols="30"
+            rows="3"
+            className=" px-2 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
             {...register("JobDescription", { required: true })}
           />
-          {errors.JobDescription && (
-            <p style={{ color: "red" }}>JobDescription can't be empty</p>
-          )}
         </div>
-        <div>
-          <label htmlFor="">AboutCompany</label>
+        {errors.JobDescription && (
+          <p style={{ color: "red" }}>JobDescription can't be empty</p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            AboutCompany
+          </p>
           <textarea
-            rows="4"
-            cols="30"
+            rows="3"
+            // cols="30"
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
             type="text"
             {...register("AboutCompany", { required: true })}
           />
-          {errors.AboutCompany && (
-            <p style={{ color: "red" }}>AboutCompany can't be empty</p>
-          )}
         </div>
+        {errors.AboutCompany && (
+          <p style={{ color: "red" }}>AboutCompany can't be empty</p>
+        )}
 
-        <div>
-          <label htmlFor="">Skills</label>
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Skills
+          </p>
           <input
             type="text"
+            className=" px-4 py-1 my-2 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
             {...register("Skillrequired", { required: true })}
           />
-          {errors.Skillrequired && (
-            <p style={{ color: "red" }}>Skill is required</p>
-          )}
         </div>
-        <div>
-          <label htmlFor="">Information</label>
+        {errors.Skillrequired && (
+          <p style={{ color: "red" }}>Skill is required</p>
+        )}
+        <div className="flex items-center justify-between">
+          <p className="text-black font-sans text-2xl mr-4 text-center font-normal">
+            Information
+          </p>
           <textarea
-            rows="4"
-            cols="30"
+            rows="2"
             type="text"
+            className=" px-4 py-1 my-1 w-8/12 rounded-md border-2 border-gray-300 bg-white  text-black outline-none focus:bg-gray-50 duration-200"
             {...register("Information", { required: true })}
           />
-          {errors.Information && (
-            <p style={{ color: "red" }}>Information can't be empty</p>
-          )}
         </div>
-        <button type="submit">{post ? "update" : "add"}</button>
+        {errors.Information && (
+          <p style={{ color: "red" }}>Information can't be empty</p>
+        )}
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="border-2 mt-5 rounded-md w-2/12 h-11  border-red-500 bg-red-500 p-2 text-white text-center font-dm-sans text-2xl font-bold leading-[144.023%]"
+          >
+            {post ? "Update" : "+ Add Job"}
+          </button>
+        </div>
       </form>
     </div>
   );

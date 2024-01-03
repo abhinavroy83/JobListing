@@ -20,6 +20,7 @@ router.post("/addjob", IsloggedIn, async (req, res) => {
   }
 });
 
+
 router.get("/home", IsloggedIn, async (req, res) => {
   try {
     res.json({
@@ -77,7 +78,6 @@ router.put("/job/editjob/:jobId", async (req, res) => {
     if (result) {
       res.json({
         status: "sucess",
-        
       });
     }
   } catch (error) {

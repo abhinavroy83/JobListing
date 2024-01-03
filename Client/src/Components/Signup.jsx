@@ -30,6 +30,13 @@ function Signup() {
               authlogin({ token: result.jwttoken, user: result.username })
             );
             Navigate("/");
+          } else if (
+            result.status === "failed" &&
+            result.msg === "Email already exists"
+          ) {
+            alert("Email already exists. Please use a different email.");
+          } else {
+            alert("Registration failed. Please try again.");
           }
         })
         .catch((error) => console.log(error));

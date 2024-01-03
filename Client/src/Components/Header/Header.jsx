@@ -33,10 +33,13 @@ function Header() {
           </div>
         ) : (
           <div className="flex text-white text-center font-DM_Sans font-medium text-xl cursor-default">
-            <Logoutbtn />
-            <p>
+            <p className=" mx-2">
               Hello! <span className=" ml-1">{user}</span>
             </p>
+            <Link to="/addjob" className="mx-2">
+              <p>Addjob</p>
+            </Link>
+            <Logoutbtn className=" mx-2" />
           </div>
         )}
       </div>
