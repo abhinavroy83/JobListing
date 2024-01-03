@@ -10,7 +10,6 @@ const errorHandler = require("./Src/Middleware/ErrorHandler");
 
 dotenv.config();
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,7 +22,6 @@ app.get("/", (req, res) => {
   });
 });
 
-
 // app.get("/health", (req, res) => {
 //   res.send("Server is runnig sucessfully");
 // });
@@ -35,7 +33,10 @@ app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
   mongoose
-    .connect(process.env.MONGODB_URL)
+    .connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => console.log("server runnig on http://localhost:5000/"))
     .catch((error) => console.log(error));
 });
