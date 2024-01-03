@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobCard from "../Components/JobCard";
+// import ClipLoader from "react-spinners/ClipLoader";
+import { FadeLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 
 import { Container, Header } from "../Components";
@@ -46,7 +48,10 @@ function Home() {
       ) : (
         <div>
           <Container>
-            <p className=" text-center">loading...</p>
+            <div className="flex items-center justify-center h-screen">
+              <FadeLoader loading={true} color={"#ED5353"} size={150} />
+            </div>
+            {/* <p className=" text-center">loading....</p> */}
           </Container>
         </div>
       )}
