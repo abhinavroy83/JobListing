@@ -25,8 +25,10 @@ function JobForm({ post }) {
 
   const inputSkills = watch("Skillrequired", "");
   const Onsubmit = async (data) => {
+    if (data && typeof inputSkills === "string") {
+      data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
+    }
     if (post) {
-      // data.Skillrequired = (data.Skillrequired || "").split(",").map((skill) => skill.trim());
       try {
         const editres = await axios.put(
           `https://joblisting-cg6e.onrender.com/job/editjob/${post._id}`,
@@ -47,7 +49,6 @@ function JobForm({ post }) {
         console.error("error during edting", error);
       }
     } else {
-      data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
       try {
         const response = await axios.post(
           "https://joblisting-cg6e.onrender.com/addjob",
