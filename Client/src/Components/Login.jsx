@@ -21,7 +21,7 @@ function Login() {
     if (data) {
       try {
         const res = await fetch(
-          "http://joblisting-cg6e.onrender.com/users/login",
+          "https://joblisting-cg6e.onrender.com/users/login",
           {
             method: "POST",
             headers: {
