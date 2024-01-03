@@ -22,6 +22,15 @@ app.get("/", (req, res) => {
   });
 });
 
+mongoose
+  .connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 // app.get("/health", (req, res) => {
 //   res.send("Server is runnig sucessfully");
 // });
@@ -32,11 +41,5 @@ app.use(JobRoutes);
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
-  mongoose
-    .connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => console.log("server runnig on http://localhost:5000/"))
-    .catch((error) => console.log(error));
+  console.log("server runnig on http://localhost:5000/");
 });
