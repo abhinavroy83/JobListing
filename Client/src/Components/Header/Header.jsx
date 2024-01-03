@@ -34,7 +34,7 @@ function Header() {
         ) : (
           <div className="flex text-white text-center font-DM_Sans font-medium text-xl cursor-default">
             <p className=" mx-2">
-              Hello! <span className=" ml-1">{user}</span>
+              Hello! <span className=" ml-1 capitalize">{user}</span>
             </p>
             <Link to="/addjob" className="mx-2">
               <p>Addjob</p>
