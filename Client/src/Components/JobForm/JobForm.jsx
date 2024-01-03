@@ -20,6 +20,7 @@ function JobForm({ post }) {
     setValue,
     formState: { errors },
   } = useForm();
+  // https://joblisting-cg6e.onrender.com/job/alljob
   // console.log("editpsot", post);
 
   const inputSkills = watch("Skillrequired", "");
@@ -28,7 +29,7 @@ function JobForm({ post }) {
       // data.Skillrequired = (data.Skillrequired || "").split(",").map((skill) => skill.trim());
       try {
         const editres = await axios.put(
-          `http://localhost:5000/job/editjob/${post._id}`,
+          `http://joblisting-cg6e.onrender.com/job/editjob/${post._id}`,
           data
         );
         // console.log("edit re", editres);
@@ -43,7 +44,7 @@ function JobForm({ post }) {
       data.Skillrequired = inputSkills.split(",").map((skill) => skill.trim());
       try {
         const response = await axios.post(
-          "http://localhost:5000/addjob",
+          "http://joblisting-cg6e.onrender.com/addjob",
           data,
           {
             headers: {

@@ -13,7 +13,7 @@ function Job() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/job/${_id}`)
+      .get(`http://joblisting-cg6e.onrender.com/job/${_id}`)
       .then((res) => {
         if (res.data && res.data.job) {
           setJob(res.data.job);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { login as authlogin } from "../Store/authSlice";
@@ -15,12 +15,18 @@ function Login() {
   } = useForm();
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-
+  const [dtx, setdtx] = useState(null);
   const onsubmit = async (data) => {
+    console.log(data);
     try {
-      const res = await axios.post("http://localhost:5000/users/login", data);
+      const res = await axios.post(
+        "http://joblisting-cg6e.onrender.com/users/login",
+        data
+      );
 
       const result = res.data;
+      // console.log(data)
+      // setdtx(result);
       // const token = res.data.jwttoken;
       // const user=res.data.username;
       if (result.status === "success") {
@@ -32,6 +38,11 @@ function Login() {
       }
     } catch (error) {
       console.error("Error during login:", error.message);
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
+
+      alert("An error occurred during login. Please try again later.");
     }
     reset();
   };
@@ -97,6 +108,14 @@ function Login() {
         </Link>
       </div>
     </div>
+    // <div>
+    //   {result ? (
+    //   ) : (
+    //     <div>
+    //       <p>signin.......</p>
+    //     </div>
+    //   )}
+    // </div>
   );
 }
 

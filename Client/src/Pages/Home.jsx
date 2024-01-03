@@ -11,7 +11,7 @@ function Home() {
   const [job, setjob] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/job/alljob")
+      .get("https://joblisting-cg6e.onrender.com/job/alljob")
       .then((res) => {
         if (res) {
           // console.log(res.data);

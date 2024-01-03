@@ -19,7 +19,7 @@ function Signup() {
     try {
       // console.log(data);
       axios
-        .post("http://localhost:5000/users/register", data)
+        .post("http://joblisting-cg6e.onrender.com/users/register", data)
         .then((res) => {
           const result = res.data;
           // const token = res.data.jwttoken;

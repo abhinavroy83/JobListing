@@ -11,7 +11,7 @@ function Editjob() {
   useEffect(() => {
     if (_id) {
       axios
-        .get(`http://localhost:5000/job/${_id}`)
+        .get(`http://joblisting-cg6e.onrender.com/job/${_id}`)
         .then((res) => {
           setjob(res.data.job);
           //   console.log(res.data.job);
