@@ -12,6 +12,7 @@ import store from "./Store/store.js";
 import Job from "./Pages/Job.jsx";
 import Addjob from "./Pages/Addjob.jsx";
 import Editjob from "./Pages/Editjob.jsx";
+import Pagenotfound from "./Pages/Pagenotfound.jsx";
 
 const route = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const route = createBrowserRouter([
       {
         path: "/job/:_id",
         element: <Job />,
+      },
+      {
+        path: "*",
+        element: <Pagenotfound />,
       },
     ],
   },

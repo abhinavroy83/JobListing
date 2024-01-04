@@ -28,7 +28,7 @@ function Home() {
         <div className="w-full py-8">
           {/* <Link to="/addjob">addjob</Link> */}
           <Container>
-            <div className=" flex flex-row">
+            <div className=" flex flex-col">
               {job ? (
                 <div className=" w-full ">
                   {job.map((item) => (
@@ -42,8 +42,11 @@ function Home() {
                   <p>loading....</p>
                 </div>
               )}
+              <p className=" text-center text-pink-600">Created and maintained by Abhinav</p>
             </div>
+
           </Container>
+
         </div>
       ) : (
         <div>
