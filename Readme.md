@@ -56,7 +56,7 @@ npm
 ### Run App
 
 ```sh
-npm run start
+npm run dev
 ```
 
 ### Preview
