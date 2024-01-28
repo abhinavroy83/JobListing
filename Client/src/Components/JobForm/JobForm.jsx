@@ -60,7 +60,7 @@ function JobForm({ post }) {
             },
             withCredentials: true,
           }
-        );
+        )
         if (response) {
           // console.log(res)
           navigate("/");
